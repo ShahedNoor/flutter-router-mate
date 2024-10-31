@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:router_mate/components/my_drawer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -118,8 +119,41 @@ class _HomePageState extends State<HomePage> {
         clearCacheAndCookies: _clearCacheAndCookies, // Pass the function here
       ),
       body: _gateway == null
-          ? const Center(
-              child: Text('Getting gateway...'),
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.wifi,
+                    size: 35,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Please connect your wifi and then restart the app to play with it!',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  MaterialButton(
+                    color: Theme.of(context).colorScheme.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    onPressed: () {
+                      SystemChannels.platform
+                          .invokeMethod('SystemNavigator.pop');
+                    },
+                    child: Text("Restart App!"),
+                  ),
+                ],
+              ),
             )
           : Stack(
               children: [
