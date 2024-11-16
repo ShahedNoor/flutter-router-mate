@@ -8,10 +8,10 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class HomePageState extends State<HomePage> {
   String? _gateway;
   bool isLoading = true;
   bool isDesktopMode = false; // Track desktop or mobile mode
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
             onPressed: () {
               _controller.reload();
             },
-            icon: const Icon(Icons.replay_outlined),
+            icon: const Icon(Icons.refresh),
           ),
 
           // Desktop mode button
